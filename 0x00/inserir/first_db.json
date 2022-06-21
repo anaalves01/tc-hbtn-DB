@@ -1,38 +1,38 @@
 [
     {
-        "email": "betty@techcamps.com",
         "id": 1,
         "nome": "Betty",
+        "email": "betty@techcamps.com",
         "telefone": 12345678
     },
     {
-        "email": "theo-castro71@gerador.com.br",
         "id": 2,
         "nome": "Theo Cauã Castro",
+        "email": "theo-castro71@gerador.com.br",
         "telefone": 11988878365
     },
     {
-        "email": "mario_dasilva@gerador.com.br",
         "id": 3,
         "nome": "Mário Lucas Kaique da Silva",
+        "email": "mario_dasilva@gerador.com.br",
         "telefone": 11986368224
     },
     {
-        "email": "lucia_simone_teixeira@gerador.com.br",
         "id": 4,
         "nome": "Lúcia Simone Raimunda Teixeira",
+        "email": "lucia_simone_teixeira@gerador.com.br",
         "telefone": 11988869120
     },
     {
-        "email": "maite_giovanna_damata@gerador.com.br",
         "id": 5,
         "nome": "Maitê Giovanna da Mata",
+        "email": "maite_giovanna_damata@gerador.com.br",
         "telefone": 11989458599
     },
     {
-        "email": "isabelle_manuela_martins@gerador.com.br",
         "id": 6,
         "nome": "Isabelle Manuela Martins",
+        "email": "isabelle_manuela_martins@gerador.com.br",
         "telefone": 11983562447
     }
 ]
