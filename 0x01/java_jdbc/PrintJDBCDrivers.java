@@ -9,7 +9,7 @@ public class PrintJDBCDrivers {
 
         while (drivers.hasMoreElements()) {
             Driver driver = drivers.nextElement();
-            System.out.println(driver.getClass() + " " + driver.getMinorVersion() + " - " + driver.getMajorVersion());
+            System.out.println(driver.getClass().getName() + " " + driver.getMinorVersion() + " - " + driver.getMajorVersion());
         }
         System.out.println();
     }
