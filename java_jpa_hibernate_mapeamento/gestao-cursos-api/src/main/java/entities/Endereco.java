@@ -42,4 +42,7 @@ public class Endereco implements Serializable {
     @Column
     private String cep;
 
+    @ManyToOne
+    private Aluno aluno;
+
 }

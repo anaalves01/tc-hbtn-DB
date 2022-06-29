@@ -27,4 +27,7 @@ public class Telefone implements Serializable {
     @Column(name = "numero_telefone")
     private String numero;
 
+    @ManyToOne
+    private Aluno aluno;
+
 }
