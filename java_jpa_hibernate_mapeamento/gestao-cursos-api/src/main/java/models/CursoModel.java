@@ -60,11 +60,11 @@ public class CursoModel {
         try {
             System.out.println("Iniciando a transação");
             cursos = em.createNativeQuery("SELECT * FROM tb_curso", Curso.class).getResultList();
-            if (cursos != null) {
+            if (cursos.isEmpty()) {
+                System.out.println("Nenhum curso para listar !!!");
+            } else {
                 System.out.println("Qtde de cursos encontrados : " + cursos.size());
                 cursos.forEach(System.out::println);
-            } else {
-                System.out.println("Nenhum curso para listar !!!");
             }
         } catch (Exception e) {
             System.err.println("Erro ao buscar cursos !!!" + e.getMessage());
