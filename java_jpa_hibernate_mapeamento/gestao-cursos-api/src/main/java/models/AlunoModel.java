@@ -59,11 +59,11 @@ public class AlunoModel {
         try {
             System.out.println("Iniciando a transação");
             alunos = em.createNativeQuery("SELECT * FROM tb_aluno", Aluno.class).getResultList();
-            if (alunos != null) {
+            if (alunos.isEmpty()) {
+                System.out.println("Nenhum aluno para listar !!!");
+            } else {
                 System.out.println("Qtde de alunos encontrados : " + alunos.size());
                 alunos.forEach(System.out::println);
-            } else {
-                System.out.println("Nenhum aluno para listar !!!");
             }
         } catch (Exception e) {
             System.err.println("Erro ao buscar alunos !!!" + e.getMessage());
