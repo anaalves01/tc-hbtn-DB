@@ -31,20 +31,23 @@ public class AlunoModel {
     public Aluno findById(Long id) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("gestao-cursos-jpa");
         EntityManager em = emf.createEntityManager();
-
+        Aluno aluno = null;
         try {
             System.out.println("Iniciando a transação");
-            Aluno aluno = em.find(Aluno.class, id);
-            System.out.println("Aluno " + id + " encontrado com sucesso !!!");
-            return aluno;
+            aluno = em.find(Aluno.class, id);
+            if (aluno != null) {
+                System.out.println("Aluno " + id + " encontrado com sucesso !!!");
+            } else {
+                System.out.println("Aluno " + id + " não encontrado !!!");
+            }
         } catch (Exception e) {
             System.err.println("Erro ao buscar o aluno " + id + " !!!" + e.getMessage());
-            return null;
         } finally {
             em.close();
             emf.close();
             System.out.println("Finalizando a transação");
         }
+        return aluno;
     }
 
     public List<Aluno> findAll() {
@@ -73,8 +76,7 @@ public class AlunoModel {
         try {
             System.out.println("Iniciando a transação");
             em.getTransaction().begin();
-            Aluno a = em.find(Aluno.class, aluno.getId());
-            em.merge(a);
+            em.merge(aluno);
             em.getTransaction().commit();
             System.out.println("Aluno " + aluno.getId() + " atualizado com sucesso !!!");
         } catch (Exception e) {

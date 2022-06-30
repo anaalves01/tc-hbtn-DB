@@ -31,20 +31,23 @@ public class CursoModel {
     public Curso findById(Long id) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("gestao-cursos-jpa");
         EntityManager em = emf.createEntityManager();
-
+        Curso curso = null;
         try {
             System.out.println("Iniciando a transação");
-            Curso curso = em.find(Curso.class, id);
-            System.out.println("Curso " + id + " encontrado com sucesso !!!");
-            return curso;
+            curso = em.find(Curso.class, id);
+            if (curso != null) {
+                System.out.println("Curso " + id + " encontrado com sucesso !!!");
+            } else {
+                System.out.println("Curso " + id + " não encontrado !!!");
+            }
         } catch (Exception e) {
             System.err.println("Erro ao buscar o curso " + id + " !!!" + e.getMessage());
-            return null;
         } finally {
             em.close();
             emf.close();
             System.out.println("Finalizando a transação");
         }
+        return curso;
     }
 
     public List<Curso> findAll() {

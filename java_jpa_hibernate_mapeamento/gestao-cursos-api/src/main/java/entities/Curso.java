@@ -43,4 +43,12 @@ public class Curso implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "aluno_id", referencedColumnName = "id"))
     private List<Aluno> alunos = new ArrayList<>();
 
+    @Override
+    public String toString() {
+        return "Curso {" +
+                "id: " + id +
+                ", Nome: " + nome +
+                ", Sigla: " + sigla +
+                '}';
+    }
 }

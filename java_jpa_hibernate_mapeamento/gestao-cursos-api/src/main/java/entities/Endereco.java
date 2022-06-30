@@ -42,7 +42,8 @@ public class Endereco implements Serializable {
     @Column
     private String cep;
 
-    @ManyToOne
-    private Aluno aluno;
-
+    @Override
+    public String toString() {
+        return getLogradouro() + " " + getEndereco() + ", " + getNumero() + " - " + getBairro() + ", " + getCidade() + " - " + getEstado() + ", " + getCep();
+    }
 }

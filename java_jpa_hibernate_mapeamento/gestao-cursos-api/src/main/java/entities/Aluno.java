@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,5 +45,21 @@ public class Aluno implements Serializable {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "aluno_id", referencedColumnName = "id")
     private List<Endereco> enderecos = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Aluno {" +
+                "id: " + id +
+                ", Nome Completo: " + nomeCompleto  +
+                ", Matricula: " + matricula +
+                ", Data de Nascimento: " + convertDateToString(nascimento) +
+                ", Email: " + email +
+                '}';
+    }
+
+    public static String convertDateToString(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(date);
+    }
 
 }

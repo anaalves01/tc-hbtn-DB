@@ -17,7 +17,7 @@ public class GestaoCursosMain {
 
         Endereco endereco1 = new Endereco();
         endereco1.setLogradouro("Rua");
-        endereco1.setEndereco("Rua Aparicio de Godoy Brunheroto");
+        endereco1.setEndereco("Aparicio de Godoy Brunheroto");
         endereco1.setNumero("124-A");
         endereco1.setBairro("Água das Pedras");
         endereco1.setCidade("Piracicaba");
@@ -26,7 +26,7 @@ public class GestaoCursosMain {
 
         Endereco endereco2 = new Endereco();
         endereco2.setLogradouro("Rua");
-        endereco2.setEndereco("Rua Hugo Caldieri Luciano");
+        endereco2.setEndereco("Hugo Caldieri Luciano");
         endereco2.setNumero("1022");
         endereco2.setBairro("Parque Pampulha");
         endereco2.setCidade("Agudos");
@@ -44,7 +44,7 @@ public class GestaoCursosMain {
         Aluno aluno1 = new Aluno();
         aluno1.setNomeCompleto("Silezia da Paixão Antonio");
         aluno1.setMatricula("373373450175");
-        aluno1.setNascimento(parseDate("11/05/2001"));
+        aluno1.setNascimento(stringToDateConvert("11/05/2001", "dd/MM/yyyy"));
         aluno1.setEmail("silezia.antonio@geradornv.com.br");
         aluno1.setEnderecos(List.of(endereco1));
         aluno1.setTelefones(List.of(telefone1));
@@ -52,7 +52,8 @@ public class GestaoCursosMain {
         Aluno aluno2 = new Aluno();
         aluno2.setNomeCompleto("Brunna de Oliveira Muchão");
         aluno2.setMatricula("034215280108");
-        aluno2.setNascimento(parseDate("07/02/1994"));
+        aluno2.setNascimento(stringToDateConvert("07/02/1994", "dd/MM/yyyy"));
+        System.out.println(stringToDateConvert("07/02/1994", "dd/MM/yyyy"));
         aluno2.setEmail("brunna.muchao@geradornv.com.br");
         aluno2.setEnderecos(List.of(endereco2));
         aluno2.setTelefones(List.of(telefone2));
@@ -64,16 +65,20 @@ public class GestaoCursosMain {
         // 2) Buscando todos os alunos na base de dados
         List<Aluno> alunos = alunoModel.findAll();
         System.out.println("Qtde de alunos encontrados : " + alunos.size());
+        alunos.forEach(System.out::println);
 
         // 3) - Atualizando aluno
         aluno1.setNomeCompleto("Alessandra Santana Abreu");
         alunoModel.update(aluno1);
+        System.out.println(aluno1);
 
         // 4) Buscando aluno por Id
-        alunoModel.findById(1L);
+        Aluno alunoById = alunoModel.findById(1L);
+        System.out.println(alunoById);
 
         // 5) - Deletando aluno
         alunoModel.delete(aluno1);
+        alunoModel.findById(1L);
 
         Professor professor1 = new Professor();
         professor1.setNomeCompleto("Juraci Monnerat Lucio");
@@ -112,21 +117,26 @@ public class GestaoCursosMain {
         // 2) Buscando todos os cursos na base de dados
         List<Curso> cursos = cursoModel.findAll();
         System.out.println("Qtde de cursos encontrados : " + cursos.size());
+        cursos.forEach(System.out::println);
 
         // 3) - Atualizando curso
         curso1.setNome("Bootcamp Java Completo");
         cursoModel.update(curso1);
+        System.out.println(curso1);
 
         // 4) Buscando curso por Id
-        cursoModel.findById(1L);
+        Curso cursoById = cursoModel.findById(1L);
+        System.out.println(cursoById);
 
         // 5) - Deletando curso
         cursoModel.delete(curso1);
+        cursoModel.findById(1L);
     }
 
-    private static Date parseDate(String date) {
+    public static Date stringToDateConvert(String dateStr, String datePattern) {
         try {
-            return new SimpleDateFormat("dd/MM/yyyy").parse(date);
+            SimpleDateFormat sdf = new SimpleDateFormat(datePattern);
+            return sdf.parse(dateStr);
         } catch (ParseException e) {
             return null;
         }

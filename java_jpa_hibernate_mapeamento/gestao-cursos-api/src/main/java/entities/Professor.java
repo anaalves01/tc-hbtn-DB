@@ -35,4 +35,13 @@ public class Professor implements Serializable {
     @OneToMany(cascade=CascadeType.ALL, mappedBy = "professor")
     private List<Curso> cursos = new ArrayList<>();
 
+    @Override
+    public String toString() {
+        return "Professor {" +
+                "id: " + id +
+                ", Nome Completo: '" + nomeCompleto + '\'' +
+                ", Matricula: '" + matricula + '\'' +
+                ", Email: '" + email + '\'' +
+                '}';
+    }
 }
