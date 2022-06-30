@@ -1,18 +1,16 @@
 package entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@Entity
 @Table(name = "tb_telefone")
 public class Telefone implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -29,6 +27,11 @@ public class Telefone implements Serializable {
 
     @Override
     public String toString() {
-        return "(" + getDdd() + ")" + getNumero();
+        return "Telefone {" +
+                "id=" + id +
+                ", ddd='" + ddd + '\'' +
+                ", numero='" + numero + '\'' +
+                '}';
     }
+
 }

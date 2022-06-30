@@ -1,18 +1,16 @@
 package entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@Entity
 @Table(name = "tb_endereco")
 public class Endereco implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -44,6 +42,15 @@ public class Endereco implements Serializable {
 
     @Override
     public String toString() {
-        return getLogradouro() + " " + getEndereco() + ", " + getNumero() + " - " + getBairro() + ", " + getCidade() + " - " + getEstado() + ", " + getCep();
+        return "Endereco {" +
+                "id=" + id +
+                ", logradouro='" + logradouro + '\'' +
+                ", endereco='" + endereco + '\'' +
+                ", numero='" + numero + '\'' +
+                ", bairro='" + bairro + '\'' +
+                ", cidade='" + cidade + '\'' +
+                ", estado='" + estado + '\'' +
+                ", cep='" + cep + '\'' +
+                '}';
     }
 }

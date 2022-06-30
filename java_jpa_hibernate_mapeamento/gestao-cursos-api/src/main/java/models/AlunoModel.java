@@ -1,17 +1,17 @@
 package models;
 
 import entities.Aluno;
+import utils.JPAUtil;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.util.List;
 
 public class AlunoModel {
 
+    EntityManager em;
+
     public void create(Aluno aluno) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("gestao-cursos-jpa");
-        EntityManager em = emf.createEntityManager();
+        em = JPAUtil.getEntityManager();
 
         try {
             System.out.println("Iniciando a transação");
@@ -23,55 +23,58 @@ public class AlunoModel {
             System.err.println("Erro ao criar um aluno !!!" + e.getMessage());
         } finally {
             em.close();
-            emf.close();
-            System.out.println("Finalizando a transação");
+            System.out.println("Finalizando a transação\n");
         }
     }
 
-    public Aluno findById(Long id) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("gestao-cursos-jpa");
-        EntityManager em = emf.createEntityManager();
-        Aluno aluno = null;
+    public void findById(Long id) {
+        em = JPAUtil.getEntityManager();
+
+        Aluno aluno;
+
         try {
             System.out.println("Iniciando a transação");
             aluno = em.find(Aluno.class, id);
             if (aluno != null) {
                 System.out.println("Aluno " + id + " encontrado com sucesso !!!");
+                System.out.println(aluno);
+                System.out.println(aluno.getTelefones());
+                System.out.println(aluno.getEnderecos());
             } else {
                 System.out.println("Aluno " + id + " não encontrado !!!");
             }
         } catch (Exception e) {
-            System.err.println("Erro ao buscar o aluno " + id + " !!!" + e.getMessage());
+            System.err.println("Erro ao buscar aluno por id !!!" + e.getMessage());
         } finally {
             em.close();
-            emf.close();
-            System.out.println("Finalizando a transação");
+            System.out.println("Finalizando a transação\n");
         }
-        return aluno;
     }
 
-    public List<Aluno> findAll() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("gestao-cursos-jpa");
-        EntityManager em = emf.createEntityManager();
+    public void findAll() {
+        em = JPAUtil.getEntityManager();
+
+        List<Aluno> alunos;
 
         try {
             System.out.println("Iniciando a transação");
-            List<Aluno> alunos = em.createNativeQuery("SELECT * FROM tb_aluno", Aluno.class).getResultList();
-            System.out.println("Alunos encontrados com sucesso !!!");
-            return alunos;
+            alunos = em.createNativeQuery("SELECT * FROM tb_aluno", Aluno.class).getResultList();
+            if (alunos != null) {
+                System.out.println("Qtde de alunos encontrados : " + alunos.size());
+                alunos.forEach(System.out::println);
+            } else {
+                System.out.println("Nenhum aluno para listar !!!");
+            }
         } catch (Exception e) {
             System.err.println("Erro ao buscar alunos !!!" + e.getMessage());
-            return null;
         } finally {
             em.close();
-            emf.close();
-            System.out.println("Finalizando a transação");
+            System.out.println("Finalizando a transação\n");
         }
     }
 
     public void update(Aluno aluno) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("gestao-cursos-jpa");
-        EntityManager em = emf.createEntityManager();
+        em = JPAUtil.getEntityManager();
 
         try {
             System.out.println("Iniciando a transação");
@@ -79,18 +82,17 @@ public class AlunoModel {
             em.merge(aluno);
             em.getTransaction().commit();
             System.out.println("Aluno " + aluno.getId() + " atualizado com sucesso !!!");
+            System.out.println(aluno);
         } catch (Exception e) {
             System.err.println("Erro ao atualizar o aluno " + aluno.getId() + " !!!" + e.getMessage());
         } finally {
             em.close();
-            emf.close();
-            System.out.println("Finalizando a transação");
+            System.out.println("Finalizando a transação\n");
         }
     }
 
     public void delete(Aluno aluno) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("gestao-cursos-jpa");
-        EntityManager em = emf.createEntityManager();
+        em = JPAUtil.getEntityManager();
 
         try {
             System.out.println("Iniciando a transação");
@@ -103,8 +105,7 @@ public class AlunoModel {
             System.err.println("Erro ao deletar o aluno " + aluno.getId() + " !!!" + e.getMessage());
         } finally {
             em.close();
-            emf.close();
-            System.out.println("Finalizando a transação");
+            System.out.println("Finalizando a transação\n");
         }
     }
 

@@ -1,20 +1,20 @@
 package entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@Entity
 @Table(name = "tb_professor")
 public class Professor implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -32,6 +32,7 @@ public class Professor implements Serializable {
     @Column
     private String email;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade=CascadeType.ALL, mappedBy = "professor")
     private List<Curso> cursos = new ArrayList<>();
 

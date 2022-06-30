@@ -1,18 +1,16 @@
 package entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@Entity
 @Table(name = "tb_material_curso")
 public class MaterialCurso implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -27,4 +25,11 @@ public class MaterialCurso implements Serializable {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "materialCurso")
     private Curso curso;
 
+    @Override
+    public String toString() {
+        return "Material Curso {" +
+                "id: " + id +
+                ", url: '" + url + '\'' +
+                '}';
+    }
 }
